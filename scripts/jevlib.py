@@ -135,7 +135,7 @@ class Jev:
                     time.sleep(1.5 * (attempt + 1) + random.random())
                     continue
                 raise RuntimeError(f'Jev {last}')
-            except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
+            except (urllib.error.URLError, OSError) as e:   # OSError covers socket.timeout on 3.9
                 last = str(e)
                 time.sleep(2 * (attempt + 1))
         raise RuntimeError(f'Jev failed after {retries} attempts: {last}')

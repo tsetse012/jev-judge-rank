@@ -67,7 +67,7 @@ The scripts read the key from this environment variable and from nowhere else. `
 
 ## Quickstart
 
-Run from the repository root. These commands write to `./out/`, which git ignores. `examples/*/out/` holds the outputs of the run recorded for this README (2026-10-07; `jev-latest` answered as `jev-1.13.0`), made by the same commands with `--out` pointing into `examples/`.
+Run from the repository root. These commands write to `./out/`, which git ignores. `examples/*/out/` holds the outputs of the run recorded for this README (2026-10-07; `jev-latest` answered as `jev-1.13.0`), made by the same commands with `--out` pointing into `examples/`: `rank.json`, `report.txt`, `groups.json`, `pairs.json`, `recall.json` and the `costs.json` ledgers. The raw request logs and `judged.json` are not included.
 
 ### Rank
 
@@ -223,7 +223,7 @@ Every request goes to TypeSafe's API at `api.typesafe.ai` (United States). What 
 - `jev_dedupe.py`: for each candidate pair, both items' title, first text field, and the other text fields (first 300 characters). `--sim-fields` stay local.
 - `jev_recall.py`: the query sentence and, for each candidate, its kind, title and the first 900 characters of its text. `pointer`, `url` and `family` stay local.
 
-The API key travels in the request header and is never written to disk. Nothing else leaves the machine: there is no telemetry and no other host. The logs and caches (`raw_jev.jsonl`, `judged.json`, `pairs.json`) stay in the output folder and contain the same data you sent, so treat them like the input. Remove secrets, personal data and anything you may not share with a third party from the fields you send, and check TypeSafe's terms for how requests are retained.
+The API key travels in the request header and is never written to disk. Nothing else leaves the machine: there is no telemetry and no other host. `raw_jev.jsonl` stays in the output folder and contains the same data you sent, so treat it like the input; `judged.json` and `pairs.json` hold only ids and answers. Remove secrets, personal data and anything you may not share with a third party from the fields you send, and check TypeSafe's terms for how requests are retained.
 
 ## Credits
 

@@ -67,7 +67,7 @@ export TYPESAFE_API_KEY=...
 
 ## 빠른 시작
 
-저장소 최상위에서 실행한다. 아래 명령은 git이 무시하는 `./out/`에 결과를 쓴다. `examples/*/out/`에는 이 README를 위해 기록한 실행 결과(2026-10-07, `jev-latest`가 `jev-1.13.0`으로 답함)가 들어 있다. 같은 명령에서 `--out`만 `examples/` 안으로 바꿔 만든 것이다.
+저장소 최상위에서 실행한다. 아래 명령은 git이 무시하는 `./out/`에 결과를 쓴다. `examples/*/out/`에는 이 README를 위해 기록한 실행 결과(2026-10-07, `jev-latest`가 `jev-1.13.0`으로 답함)가 들어 있다. 같은 명령에서 `--out`만 `examples/` 안으로 바꿔 만든 것이다. 들어 있는 파일은 `rank.json`, `report.txt`, `groups.json`, `pairs.json`, `recall.json`과 `costs.json` 장부다. 요청 원문 로그와 `judged.json`은 넣지 않았다.
 
 ### 순위 (rank)
 
@@ -223,7 +223,7 @@ python3 scripts/jev_recall.py --corpus examples/recall/corpus.json \
 - `jev_dedupe.py`: 후보 쌍마다 두 항목의 제목, 첫 텍스트 필드, 나머지 텍스트 필드(앞 300자). `--sim-fields`는 로컬에만 남는다.
 - `jev_recall.py`: 질의 문장, 그리고 후보마다 kind, 제목, 본문 앞 900자. `pointer`, `url`, `family`는 로컬에만 남는다.
 
-API 키는 요청 헤더에만 실리고 디스크에 쓰지 않는다. 그 밖에는 아무것도 이 컴퓨터를 떠나지 않는다. 사용 통계를 보내지 않고 다른 곳에 접속하지도 않는다. 로그와 캐시(`raw_jev.jsonl`, `judged.json`, `pairs.json`)는 출력 폴더에 남고 보낸 내용이 그대로 들어 있으니 입력 자료처럼 다룬다. 보내는 필드에서 비밀값, 개인정보, 제3자에게 넘기면 안 되는 내용은 미리 빼고, TypeSafe가 요청을 얼마나 보관하는지는 그쪽 약관에서 확인한다.
+API 키는 요청 헤더에만 실리고 디스크에 쓰지 않는다. 그 밖에는 아무것도 이 컴퓨터를 떠나지 않는다. 사용 통계를 보내지 않고 다른 곳에 접속하지도 않는다. `raw_jev.jsonl`은 출력 폴더에 남고 보낸 내용이 그대로 들어 있으니 입력 자료처럼 다룬다. `judged.json`과 `pairs.json`에는 id와 답만 들어 있다. 보내는 필드에서 비밀값, 개인정보, 제3자에게 넘기면 안 되는 내용은 미리 빼고, TypeSafe가 요청을 얼마나 보관하는지는 그쪽 약관에서 확인한다.
 
 ## 출처
 
