@@ -56,7 +56,7 @@ A Noul answer of 0.5 means "don't know", not "medium"; to measure a degree, use 
 
 Python 3.9 or newer. Standard library only; there is nothing to `pip install`.
 
-1. Clone or download this repository. To also use it as a Claude Code skill, put the folder at `~/.claude/skills/jev-judge-rank`; the scripts live under `scripts/`, so the folder works there as it is.
+1. Clone this repository: `git clone https://github.com/tsetse012/jev-judge-rank`. To also use it as a Claude Code skill, put the folder at `~/.claude/skills/jev-judge-rank`; the scripts live under `scripts/`, so the folder works there as it is.
 2. Create an API key at https://console.typesafe.ai/settings/keys and export it:
 
 ```bash

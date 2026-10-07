@@ -56,7 +56,7 @@ Noul 답 0.5는 "중간"이 아니라 "모르겠다"다. 정도를 재려면 Sco
 
 Python 3.9 이상. 표준 라이브러리만 쓰므로 `pip install`할 것이 없다.
 
-1. 이 저장소를 클론하거나 내려받는다. Claude Code 스킬로도 쓰려면 폴더를 `~/.claude/skills/jev-judge-rank`에 둔다. 스크립트가 `scripts/` 아래에 있어서 그 자리에서 그대로 동작한다.
+1. 이 저장소를 클론한다: `git clone https://github.com/tsetse012/jev-judge-rank`. Claude Code 스킬로도 쓰려면 폴더를 `~/.claude/skills/jev-judge-rank`에 둔다. 스크립트가 `scripts/` 아래에 있어서 그 자리에서 그대로 동작한다.
 2. https://console.typesafe.ai/settings/keys 에서 API 키를 만들고 환경변수로 내보낸다.
 
 ```bash
