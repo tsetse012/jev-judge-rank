@@ -109,6 +109,14 @@ class AskTest(TempOut):
             jevlib.Jev(self.out).ask({}, {'q': jevlib.noul('x')})
         self.assertEqual(fake.call_count, 2)
 
+    def test_socket_timeout_is_retried(self):
+        """socket.timeout is an OSError subclass on 3.9, not TimeoutError; a stalled reply must still be retried."""
+        import socket
+        fake = mock.Mock(side_effect=[socket.timeout('stalled'), response({'q': {'noul': 0.5}})])
+        with mock.patch('urllib.request.urlopen', fake):
+            jevlib.Jev(self.out).ask({}, {'q': jevlib.noul('x')})
+        self.assertEqual(fake.call_count, 2)
+
     def test_gives_up_after_five_attempts(self):
         fake = mock.Mock(side_effect=[http_error(503) for _ in range(5)])
         with mock.patch('urllib.request.urlopen', fake), self.assertRaises(RuntimeError) as cm:
