@@ -1,0 +1,73 @@
+{
+  "_about": "Example config for examples/ideas/items.json. Two requests per item: 'main' asks the three Score axes with name, pitch and mechanism in the state; 'pitch_check' asks the penalty Noul with only the pitch in the state, so Jev cannot answer it from the mechanism field. has_demo is a fact the items already carry, so it is a field penalty computed by code, not a question.",
+  "id_field": "id",
+  "title_field": "name",
+  "state_fields": ["name", "pitch", "mechanism"],
+  "tie_break_field": "has_demo",
+  "top": 10,
+  "strength_quantile": 0.85,
+  "round_digits": 3,
+  "report_fields": ["pitch"],
+  "requests": [
+    {
+      "name": "main",
+      "questions": {
+        "novelty": {
+          "type": "score",
+          "role": "axis",
+          "weight": 1.0,
+          "instructions": "How new is this idea? High if the combination of problem and mechanism is one few people have built. A generic assistant, a thin wrapper around a chat model, or a copy of a common app gets the lowest level.",
+          "levels": [
+            "a generic assistant, a thin wrapper around a chat model, or a copy of a common app",
+            "a common idea with a small twist",
+            "a known pattern applied carefully to a specific problem",
+            "one part (what it observes, how it picks candidates, or how it decides) is unusual",
+            "the combination itself is new; few people have built anything like it"
+          ]
+        },
+        "usefulness": {
+          "type": "score",
+          "role": "axis",
+          "weight": 1.0,
+          "instructions": "How useful is this idea to the people it is for? High if it solves a real, frequent problem and the mechanism plausibly solves it. A vague benefit with no clear user or problem gets the lowest level.",
+          "levels": [
+            "no clear user or problem, or a toy",
+            "useful now and then, or for a problem most people already solve another way",
+            "useful for a clear group of people",
+            "solves a frequent, costly problem for a clear group of people",
+            "many people would use it every week"
+          ]
+        },
+        "feasibility": {
+          "type": "score",
+          "role": "axis",
+          "weight": 0.7,
+          "instructions": "How feasible is a working first version for one developer with off-the-shelf models and public data? Low if it needs data, accuracy or access that a solo developer cannot get.",
+          "levels": [
+            "needs data, accuracy or access a solo developer cannot get",
+            "possible only with a large effort or a risky dependency",
+            "doable with steady work over a month or two",
+            "a first version fits in a few weekends",
+            "a first version fits in one weekend"
+          ]
+        }
+      }
+    },
+    {
+      "name": "pitch_check",
+      "state_fields": ["pitch"],
+      "questions": {
+        "pitch_mechanism": {
+          "type": "noul",
+          "role": "penalty",
+          "below": 0.4,
+          "penalty": 0.10,
+          "instructions": "`pitch` states a concrete mechanism: it says what the system takes in and what it does with it, not only the benefit."
+        }
+      }
+    }
+  ],
+  "field_penalties": [
+    {"field": "has_demo", "below": 1, "penalty": 0.05}
+  ]
+}

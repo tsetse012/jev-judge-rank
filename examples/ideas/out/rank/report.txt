@@ -1,0 +1,104 @@
+Jev rank (2026-10-07)
+
+Method: 2 Jev request(s) per item (main, pitch_check); items are never bundled into one request. Axes = novelty (weight 1) · usefulness (weight 1) · feasibility (weight 0.7). Combined = weighted mean of (axis expected value / top level index), minus 0.1 if pitch_mechanism < 0.4, minus 0.05 if field has_demo < 1. Strength = top 15% on that axis.
+Scale: items 40 · judged 40 · missing 0 · Jev calls 80 · input 42,526 tokens ≈ $0.002
+Checks: feasibility vs has_demo rank correlation 0.265 (n=40)
+How to read: use the order, not the absolute values (scores sit in a narrow band). Open the top items yourself before acting on them.
+==============================================================================
+Part 1. Top 10 overall
+==============================================================================
+
+#1 [I36] Code Change Risk Triage   strengths [usefulness·feasibility]
+  scores: novelty 1.73/4 · usefulness 2.97/4 · feasibility 3.62/4 · combined 0.67 · pitch_mechanism 0.88
+  pitch: Sorts incoming pull requests by how risky they are so the riskiest get reviewed first.
+
+#2 [I32] Dataset License Checker
+  scores: novelty 1.90/4 · usefulness 2.70/4 · feasibility 3.25/4 · combined 0.637 · pitch_mechanism 0.6
+  pitch: Checks whether a dataset's license allows the use you plan before you download it.
+
+#3 [I12] Pull Request Risk Labeler   strengths [usefulness]
+  scores: novelty 1.68/4 · usefulness 2.98/4 · feasibility 3.15/4 · combined 0.636 · pitch_mechanism 0.75
+  pitch: Labels each pull request low, medium or high risk so reviewers know where to look first.
+
+#4 [I05] Bug Report Deduplicator   strengths [usefulness]
+  scores: novelty 1.83/4 · usefulness 3.01/4 · feasibility 2.71/4 · combined 0.624 · pitch_mechanism 0.59
+  pitch: Finds new bug reports that describe an issue already in the tracker.
+
+#5 [I23] Code Review Tone Fixer   strengths [novelty]
+  scores: novelty 2.02/4 · usefulness 2.76/4 · feasibility 2.58/4 · combined 0.61 · pitch_mechanism 0.86
+  pitch: Rewrites harsh code review comments into direct but polite ones before they are posted.
+
+#6 [I26] Flaky Test Detector   strengths [novelty·usefulness]
+  scores: novelty 2.09/4 · usefulness 3.01/4 · feasibility 2.12/4 · combined 0.61 · pitch_mechanism 0.54
+  pitch: Finds tests that both fail and pass on the same code so they can be quarantined.
+
+#7 [I40] First Issue Matchmaker
+  scores: novelty 1.89/4 · usefulness 2.84/4 · feasibility 2.56/4 · combined 0.604 · pitch_mechanism 0.62
+  pitch: Suggests beginner-friendly open source issues that match the languages and topics a new contributor knows.
+
+#8 [I18] Grant Call Matcher
+  scores: novelty 1.84/4 · usefulness 2.80/4 · feasibility 2.63/4 · combined 0.6 · pitch_mechanism 0.89
+  pitch: Collects grant calls from public listings and alerts you to the ones that fit your project.
+
+#9 [I15] Freelance Contract Clause Highlighter   strengths [usefulness]
+  scores: novelty 1.95/4 · usefulness 2.91/4 · feasibility 2.94/4 · combined 0.591 · pitch_mechanism 0.75
+  pitch: Highlights clauses in a freelance contract that shift risk onto the freelancer.
+
+#10 [I38] Habit Streak Explainer   strengths [novelty]
+  scores: novelty 2.02/4 · usefulness 2.38/4 · feasibility 2.79/4 · combined 0.588 · pitch_mechanism 0.84
+  pitch: Explains why your habit streaks break by finding what the missed days have in common.
+
+==============================================================================
+Part 2. Top 15 per axis (overall rank in parentheses)
+==============================================================================
+
+## novelty
+ 1. [I29] API Breaking Change Watcher novelty 2.20 (#22)
+ 2. [I17] Plant Watering Reminder from Photos novelty 2.18 (#30)
+ 3. [I26] Flaky Test Detector novelty 2.09 (#6)
+ 4. [I11] Parking Sign Interpreter novelty 2.05 (#23)
+ 5. [I28] Noise Complaint Builder novelty 2.05 (#33)
+ 6. [I23] Code Review Tone Fixer novelty 2.02 (#5)
+ 7. [I38] Habit Streak Explainer novelty 2.02 (#10)
+ 8. [I16] Board Game Rules Referee novelty 2.02 (#15)
+ 9. [I39] Houseplant Thirst Detector novelty 2.01 (#32)
+10. [I15] Freelance Contract Clause Highlighter novelty 1.95 (#9)
+11. [I20] Alt Text Auditor novelty 1.91 (#19)
+12. [I32] Dataset License Checker novelty 1.90 (#2)
+13. [I40] First Issue Matchmaker novelty 1.89 (#7)
+14. [I18] Grant Call Matcher novelty 1.84 (#8)
+15. [I07] Rental Listing Scam Checker novelty 1.84 (#16)
+
+## usefulness
+ 1. [I03] Meeting Action Item Extractor usefulness 3.11 (#18)
+ 2. [I05] Bug Report Deduplicator usefulness 3.01 (#4)
+ 3. [I26] Flaky Test Detector usefulness 3.01 (#6)
+ 4. [I12] Pull Request Risk Labeler usefulness 2.98 (#3)
+ 5. [I36] Code Change Risk Triage usefulness 2.97 (#1)
+ 6. [I27] Call Transcript Task Finder usefulness 2.93 (#26)
+ 7. [I15] Freelance Contract Clause Highlighter usefulness 2.91 (#9)
+ 8. [I01] Grocery List Merger usefulness 2.90 (#11)
+ 9. [I21] Inbox Newsletter Digest usefulness 2.89 (#17)
+10. [I30] Weekly Newsletter Roll-up usefulness 2.89 (#25)
+11. [I07] Rental Listing Scam Checker usefulness 2.86 (#16)
+12. [I40] First Issue Matchmaker usefulness 2.84 (#7)
+13. [I35] Volunteer Shift Filler usefulness 2.84 (#24)
+14. [I18] Grant Call Matcher usefulness 2.80 (#8)
+15. [I29] API Breaking Change Watcher usefulness 2.77 (#22)
+
+## feasibility
+ 1. [I10] Startup Idea Generator feasibility 3.86 (#37)
+ 2. [I19] AI Content Booster feasibility 3.78 (#36)
+ 3. [I04] Productivity Copilot feasibility 3.78 (#40)
+ 4. [I36] Code Change Risk Triage feasibility 3.62 (#1)
+ 5. [I25] Smart Study Buddy feasibility 3.53 (#35)
+ 6. [I13] Bedtime Story Narrator feasibility 3.37 (#21)
+ 7. [I02] Commit Message Linter feasibility 3.32 (#13)
+ 8. [I14] Wellness Companion feasibility 3.30 (#38)
+ 9. [I32] Dataset License Checker feasibility 3.25 (#2)
+10. [I31] Life Coach Bot feasibility 3.22 (#39)
+11. [I12] Pull Request Risk Labeler feasibility 3.15 (#3)
+12. [I34] Commute Playlist Builder feasibility 3.12 (#27)
+13. [I37] Museum Audio Guide Maker feasibility 3.04 (#29)
+14. [I33] Pantry Ingredient Substitutes feasibility 2.95 (#12)
+15. [I15] Freelance Contract Clause Highlighter feasibility 2.94 (#9)

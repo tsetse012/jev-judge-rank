@@ -1,0 +1,282 @@
+[
+ {
+  "id": "I01",
+  "name": "Grocery List Merger",
+  "pitch": "Merges the shopping lists of everyone in a household into one list sorted by store aisle.",
+  "mechanism": "Each person adds items in a shared chat, and a small model normalizes names such as milk and 2% milk. Items are grouped by an aisle map the household edits once per store, duplicates are merged and quantities are added up.",
+  "has_demo": 1
+ },
+ {
+  "id": "I02",
+  "name": "Commit Message Linter",
+  "pitch": "Rejects commit messages that do not say why a change was made.",
+  "mechanism": "A git hook sends the commit message and a short diff summary to a yes/no classifier that asks whether the message explains the reason for the change. Below a threshold the commit is blocked with a one-line hint, and a flag skips the check.",
+  "has_demo": 1
+ },
+ {
+  "id": "I03",
+  "name": "Meeting Action Item Extractor",
+  "pitch": "Pulls action items, owners and due dates out of a meeting transcript.",
+  "mechanism": "The transcript is split into speaker turns and each turn is classified as an action item or not. Action items get an owner picked from the attendee list and a due date parsed by code, then they are posted to the team channel as a checklist.",
+  "has_demo": 1
+ },
+ {
+  "id": "I04",
+  "name": "Productivity Copilot",
+  "pitch": "An AI assistant that makes your workday easier.",
+  "mechanism": "It uses a large language model to help with everyday work. You can ask it anything and it answers.",
+  "has_demo": 0
+ },
+ {
+  "id": "I05",
+  "name": "Bug Report Deduplicator",
+  "pitch": "Finds new bug reports that describe an issue already in the tracker.",
+  "mechanism": "Each new report is compared with its ten most similar open issues by text similarity, and a model judges each pair as the same bug or not. Matches above a threshold are linked and the reporter is pointed to the existing issue.",
+  "has_demo": 1
+ },
+ {
+  "id": "I06",
+  "name": "Lecture Slide Quiz Maker",
+  "pitch": "Turns a lecture's slides into a ten-question practice quiz.",
+  "mechanism": "Slide text is extracted page by page and a model writes one multiple-choice question per key concept. A second pass checks that each answer is supported by the slide it came from, and students get the quiz as a shareable link.",
+  "has_demo": 1
+ },
+ {
+  "id": "I07",
+  "name": "Rental Listing Scam Checker",
+  "pitch": "Flags rental listings whose text matches common scam patterns.",
+  "mechanism": "The listing text, price and contact details are checked against a list of scam signals: a deposit before any viewing, a price far below the local median, payment outside the platform. Each signal is one yes/no question to a classifier, and code computes the local median from public listings.",
+  "has_demo": 0
+ },
+ {
+  "id": "I08",
+  "name": "Recipe Swap Suggester",
+  "pitch": "Suggests ingredient substitutions using only what is already in your fridge.",
+  "mechanism": "You list the ingredients you have, and for a chosen recipe the app finds the missing ones. Substitutes from your list are ranked with a small table of what each ingredient does in cooking (fat, acid, binder), and a model explains each swap in one sentence.",
+  "has_demo": 1
+ },
+ {
+  "id": "I09",
+  "name": "Voice Memo Sorter",
+  "pitch": "Files voice memos into project folders by what they talk about.",
+  "mechanism": "Memos are transcribed on the phone, then each transcript is matched against the user's folder names and earlier memos. The best folder is used when the match is confident; otherwise the memo waits in an inbox.",
+  "has_demo": 0
+ },
+ {
+  "id": "I10",
+  "name": "Startup Idea Generator",
+  "pitch": "Generates unlimited startup ideas with AI.",
+  "mechanism": "A language model is prompted to brainstorm startup ideas. The user can save the ones they like.",
+  "has_demo": 1
+ },
+ {
+  "id": "I11",
+  "name": "Parking Sign Interpreter",
+  "pitch": "Reads a photo of stacked parking signs and says whether you can park there right now.",
+  "mechanism": "A vision model transcribes each sign and code turns the rules into time ranges for the current day. The app answers yes or no and shows the rule that decided it; unclear signs return check manually.",
+  "has_demo": 0
+ },
+ {
+  "id": "I12",
+  "name": "Pull Request Risk Labeler",
+  "pitch": "Labels each pull request low, medium or high risk so reviewers know where to look first.",
+  "mechanism": "The diff is summarized per file, and a classifier scores each file on whether it touches authentication, data deletion or payments. The highest file score becomes the pull request label, and the risky files are listed in a comment.",
+  "has_demo": 1
+ },
+ {
+  "id": "I13",
+  "name": "Bedtime Story Narrator",
+  "pitch": "Writes and reads aloud a calm bedtime story that features your child's own toys.",
+  "mechanism": "Parents enter the toy names and a theme, a model writes a five-minute story, and a text-to-speech voice reads it slowly. Stories are saved so they can be played again.",
+  "has_demo": 1
+ },
+ {
+  "id": "I14",
+  "name": "Wellness Companion",
+  "pitch": "A friendly AI that supports your mental wellness every day.",
+  "mechanism": "The app chats with you about how you feel and offers encouragement. It is powered by AI.",
+  "has_demo": 0
+ },
+ {
+  "id": "I15",
+  "name": "Freelance Contract Clause Highlighter",
+  "pitch": "Highlights clauses in a freelance contract that shift risk onto the freelancer.",
+  "mechanism": "The contract is split into clauses and each clause gets yes/no questions such as unlimited revisions, payment only after client approval, or transfer of rights before payment. Flagged clauses are highlighted with the matching question as the reason.",
+  "has_demo": 0
+ },
+ {
+  "id": "I16",
+  "name": "Board Game Rules Referee",
+  "pitch": "Answers rules questions during a board game by pointing to the exact rulebook paragraph.",
+  "mechanism": "The rulebook is split into numbered paragraphs. For each question a retriever shortlists paragraphs and a model picks the one that answers it, and the app shows that paragraph itself rather than a paraphrase.",
+  "has_demo": 1
+ },
+ {
+  "id": "I17",
+  "name": "Plant Watering Reminder from Photos",
+  "pitch": "Tells you which houseplant needs water by looking at a weekly photo of each plant.",
+  "mechanism": "Each week you photograph every plant, and a vision model rates leaf droop and soil color against the previous photo. When the rating drops, the app sends a watering reminder for that plant.",
+  "has_demo": 0
+ },
+ {
+  "id": "I18",
+  "name": "Grant Call Matcher",
+  "pitch": "Collects grant calls from public listings and alerts you to the ones that fit your project.",
+  "mechanism": "Listings are collected daily, deadlines are parsed by code, and each call is judged against a short project profile on eligibility and topic fit. Calls above a threshold go into a weekly email sorted by deadline.",
+  "has_demo": 1
+ },
+ {
+  "id": "I19",
+  "name": "AI Content Booster",
+  "pitch": "Boost your content with the power of AI.",
+  "mechanism": "It improves any text you give it using a language model. It works with blogs, posts and more.",
+  "has_demo": 1
+ },
+ {
+  "id": "I20",
+  "name": "Alt Text Auditor",
+  "pitch": "Finds images on a website whose alt text does not describe the image.",
+  "mechanism": "A crawler collects each image with its alt text, and a vision model writes a short caption for the image. A classifier judges whether the alt text and the caption describe the same thing, and the report lists failing images by page.",
+  "has_demo": 0
+ },
+ {
+  "id": "I21",
+  "name": "Inbox Newsletter Digest",
+  "pitch": "Bundles a week of newsletters into one digest email with a summary of each newsletter.",
+  "mechanism": "A mail filter moves newsletters into a folder. Once a week each newsletter is summarized in three bullet points and the summaries are sent together as a single email, with links to the originals.",
+  "has_demo": 1
+ },
+ {
+  "id": "I22",
+  "name": "Language Exchange Matcher",
+  "pitch": "Pairs language learners whose native and target languages complement each other and whose free hours overlap.",
+  "mechanism": "Profiles list native language, target language, level and free hours. Code finds complementary pairs with overlapping hours, and a model ranks them by shared interests found in a short bio.",
+  "has_demo": 0
+ },
+ {
+  "id": "I23",
+  "name": "Code Review Tone Fixer",
+  "pitch": "Rewrites harsh code review comments into direct but polite ones before they are posted.",
+  "mechanism": "A browser extension catches the comment before it is posted and a classifier scores it for harshness. Only comments above a threshold are rewritten by a model, and the author sees both versions and picks one.",
+  "has_demo": 1
+ },
+ {
+  "id": "I24",
+  "name": "Second-hand Price Estimator",
+  "pitch": "Estimates the resale value of a second-hand item from a photo of it and its label.",
+  "mechanism": "A vision model identifies the brand and the item type, and code looks up recent sale prices of similar listings. The app shows a price range and how many sales it was based on.",
+  "has_demo": 0
+ },
+ {
+  "id": "I25",
+  "name": "Smart Study Buddy",
+  "pitch": "Your personal AI study partner.",
+  "mechanism": "It helps you study better with AI. Ask questions and get answers anytime.",
+  "has_demo": 1
+ },
+ {
+  "id": "I26",
+  "name": "Flaky Test Detector",
+  "pitch": "Finds tests that both fail and pass on the same code so they can be quarantined.",
+  "mechanism": "Test results are stored per test and per commit, and code flags tests whose outcome changed without a code change. A model groups the failure messages by likely cause, so one fix covers several tests.",
+  "has_demo": 1
+ },
+ {
+  "id": "I27",
+  "name": "Call Transcript Task Finder",
+  "pitch": "Finds the to-dos in a recorded call, who owns each one and when it is due.",
+  "mechanism": "The call recording is transcribed and split by speaker, and each turn is classified as a task or not. Tasks get an owner chosen from the participants and a due date parsed from the text, then the list is sent to the team as a checklist.",
+  "has_demo": 0
+ },
+ {
+  "id": "I28",
+  "name": "Noise Complaint Builder",
+  "pitch": "Turns a short audio clip into a structured noise complaint with time, level and type.",
+  "mechanism": "The phone records ten seconds of audio, code measures the decibel level, and a classifier labels the noise type: construction, music or traffic. The app fills in the city complaint form fields and the user submits it.",
+  "has_demo": 0
+ },
+ {
+  "id": "I29",
+  "name": "API Breaking Change Watcher",
+  "pitch": "Tells you when an API your code depends on announces a breaking change.",
+  "mechanism": "The tool reads your dependency files, follows each provider's changelog feed and asks a classifier whether each new entry is a breaking change for an endpoint you use. Matches open an issue in your repository.",
+  "has_demo": 1
+ },
+ {
+  "id": "I30",
+  "name": "Weekly Newsletter Roll-up",
+  "pitch": "Collects the newsletters you received this week and sends you one email that summarizes each of them.",
+  "mechanism": "Newsletters are filtered into a separate folder as they arrive. Every week each one is summarized in a few bullet points, and all the summaries go out together in one email with links back to the originals.",
+  "has_demo": 0
+ },
+ {
+  "id": "I31",
+  "name": "Life Coach Bot",
+  "pitch": "An AI life coach that helps you reach your goals.",
+  "mechanism": "Tell it your goals and it motivates you with personalized AI advice. It learns from your conversations.",
+  "has_demo": 0
+ },
+ {
+  "id": "I32",
+  "name": "Dataset License Checker",
+  "pitch": "Checks whether a dataset's license allows the use you plan before you download it.",
+  "mechanism": "The tool fetches the dataset card and license text and asks one yes/no question per planned use: commercial use, redistribution, model training. The answer lists each use as allowed, not allowed or unclear, with the license sentence behind it.",
+  "has_demo": 1
+ },
+ {
+  "id": "I33",
+  "name": "Pantry Ingredient Substitutes",
+  "pitch": "When a recipe calls for something you lack, proposes a substitute from the food you already have at home.",
+  "mechanism": "You keep a list of what is in your pantry and fridge. For the recipe you pick, missing ingredients are matched to substitutes from that list using a table of what each ingredient does in cooking (fat, acid, binder), and a short explanation is shown for each swap.",
+  "has_demo": 1
+ },
+ {
+  "id": "I34",
+  "name": "Commute Playlist Builder",
+  "pitch": "Builds a playlist for your commute that fits the weather and how long the trip will take.",
+  "mechanism": "The app reads the forecast and the expected trip time, and a small classifier picks a mood label. It fills the length of the trip with songs from your library tagged with that mood.",
+  "has_demo": 1
+ },
+ {
+  "id": "I35",
+  "name": "Volunteer Shift Filler",
+  "pitch": "Finds volunteers for open shifts by matching each shift's needs to people's stated skills and free time.",
+  "mechanism": "Shifts list a time and the skills needed, and volunteers describe their availability and skills in free text. A model judges each volunteer and shift pair for fit, code removes people who are already booked, and the coordinator gets a ranked short list per shift.",
+  "has_demo": 0
+ },
+ {
+  "id": "I36",
+  "name": "Code Change Risk Triage",
+  "pitch": "Sorts incoming pull requests by how risky they are so the riskiest get reviewed first.",
+  "mechanism": "Every changed file in a pull request is scored on whether it touches authentication, deletes data or handles payments. The pull request takes the highest file score as its risk label, and a comment lists the files that drove it.",
+  "has_demo": 1
+ },
+ {
+  "id": "I37",
+  "name": "Museum Audio Guide Maker",
+  "pitch": "Creates a spoken audio guide for a small museum from its existing exhibit labels.",
+  "mechanism": "Staff upload photos of the labels, the text is extracted, and a model rewrites each label as a one-minute spoken script. Text-to-speech produces the audio, and visitors scan a code next to each exhibit to play it.",
+  "has_demo": 0
+ },
+ {
+  "id": "I38",
+  "name": "Habit Streak Explainer",
+  "pitch": "Explains why your habit streaks break by finding what the missed days have in common.",
+  "mechanism": "The app logs habit check-ins with context such as sleep hours, calendar load and weather. Code compares missed days with completed days, and a model writes the strongest pattern as one sentence.",
+  "has_demo": 1
+ },
+ {
+  "id": "I39",
+  "name": "Houseplant Thirst Detector",
+  "pitch": "Compares weekly photos of each houseplant and reminds you to water the ones that look dry.",
+  "mechanism": "You take a photo of every plant once a week. A vision model scores how much the leaves droop and how dry the soil looks compared with last week, and a drop in the score triggers a watering reminder for that plant.",
+  "has_demo": 0
+ },
+ {
+  "id": "I40",
+  "name": "First Issue Matchmaker",
+  "pitch": "Suggests beginner-friendly open source issues that match the languages and topics a new contributor knows.",
+  "mechanism": "The tool reads issues labeled for newcomers across many repositories, and a classifier scores each issue on how much setup it needs and whether its description is complete. Issues are matched to a contributor's profile and sent as a weekly short list.",
+  "has_demo": 1
+ }
+]

@@ -1,0 +1,49 @@
+{
+ "query": "a Stop hook that checks whether the agent's done claim is backed by evidence",
+ "corpus": "examples/recall/corpus.json",
+ "candidates": 35,
+ "judged": 35,
+ "threshold": 0.5,
+ "hits": [
+  {
+   "p": 0.76,
+   "id": "F02",
+   "kind": "family",
+   "title": "Completion-claim check at stop",
+   "family": null,
+   "url": null,
+   "pointer": "stingray",
+   "text": "When an agent is about to stop and says the work is done, judge whether that claim matches the evidence in the session, and send the agent back to work when it does not."
+  },
+  {
+   "p": 0.62,
+   "id": "F27",
+   "kind": "family",
+   "title": "Supervisor alongside a coding agent",
+   "family": null,
+   "url": null,
+   "pointer": "hermes-jev",
+   "text": "The working agent keeps going while Jev judges, after each step, whether it is finished or stuck and whether the next step is fix, verify, replan or ask a person."
+  },
+  {
+   "p": 0.62,
+   "id": "F17",
+   "kind": "family",
+   "title": "Extraction by pointing at numbered fragments",
+   "family": null,
+   "url": null,
+   "pointer": "jeveryword",
+   "text": "Jev cannot write, so have it pick the number or label of a source fragment; code then copies the original text out or fills in a blank with it."
+  },
+  {
+   "p": 0.54,
+   "id": "F08",
+   "kind": "family",
+   "title": "Memory selection, recall and validation",
+   "family": null,
+   "url": null,
+   "pointer": "jevmory",
+   "text": "Decide per memory item whether an agent should store it, bring it back for the current turn, or still trust it."
+  }
+ ]
+}

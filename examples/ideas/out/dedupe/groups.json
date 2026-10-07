@@ -1,0 +1,213 @@
+{
+ "threshold": 0.65,
+ "pairs_asked": 8,
+ "pairs_missing": 0,
+ "reps": [
+  {
+   "id": "I01",
+   "title": "Grocery List Merger",
+   "members": []
+  },
+  {
+   "id": "I02",
+   "title": "Commit Message Linter",
+   "members": []
+  },
+  {
+   "id": "I03",
+   "title": "Meeting Action Item Extractor",
+   "members": [
+    {
+     "id": "I27",
+     "title": "Call Transcript Task Finder",
+     "same": 0.905
+    }
+   ]
+  },
+  {
+   "id": "I05",
+   "title": "Bug Report Deduplicator",
+   "members": []
+  },
+  {
+   "id": "I06",
+   "title": "Lecture Slide Quiz Maker",
+   "members": []
+  },
+  {
+   "id": "I08",
+   "title": "Recipe Swap Suggester",
+   "members": [
+    {
+     "id": "I33",
+     "title": "Pantry Ingredient Substitutes",
+     "same": 0.895
+    }
+   ]
+  },
+  {
+   "id": "I10",
+   "title": "Startup Idea Generator",
+   "members": []
+  },
+  {
+   "id": "I12",
+   "title": "Pull Request Risk Labeler",
+   "members": [
+    {
+     "id": "I36",
+     "title": "Code Change Risk Triage",
+     "same": 0.925
+    }
+   ]
+  },
+  {
+   "id": "I13",
+   "title": "Bedtime Story Narrator",
+   "members": []
+  },
+  {
+   "id": "I16",
+   "title": "Board Game Rules Referee",
+   "members": []
+  },
+  {
+   "id": "I18",
+   "title": "Grant Call Matcher",
+   "members": []
+  },
+  {
+   "id": "I19",
+   "title": "AI Content Booster",
+   "members": []
+  },
+  {
+   "id": "I21",
+   "title": "Inbox Newsletter Digest",
+   "members": [
+    {
+     "id": "I30",
+     "title": "Weekly Newsletter Roll-up",
+     "same": 0.97
+    }
+   ]
+  },
+  {
+   "id": "I23",
+   "title": "Code Review Tone Fixer",
+   "members": []
+  },
+  {
+   "id": "I25",
+   "title": "Smart Study Buddy",
+   "members": []
+  },
+  {
+   "id": "I26",
+   "title": "Flaky Test Detector",
+   "members": []
+  },
+  {
+   "id": "I29",
+   "title": "API Breaking Change Watcher",
+   "members": []
+  },
+  {
+   "id": "I32",
+   "title": "Dataset License Checker",
+   "members": []
+  },
+  {
+   "id": "I34",
+   "title": "Commute Playlist Builder",
+   "members": []
+  },
+  {
+   "id": "I38",
+   "title": "Habit Streak Explainer",
+   "members": []
+  },
+  {
+   "id": "I40",
+   "title": "First Issue Matchmaker",
+   "members": []
+  },
+  {
+   "id": "I04",
+   "title": "Productivity Copilot",
+   "members": []
+  },
+  {
+   "id": "I07",
+   "title": "Rental Listing Scam Checker",
+   "members": []
+  },
+  {
+   "id": "I09",
+   "title": "Voice Memo Sorter",
+   "members": []
+  },
+  {
+   "id": "I11",
+   "title": "Parking Sign Interpreter",
+   "members": []
+  },
+  {
+   "id": "I14",
+   "title": "Wellness Companion",
+   "members": []
+  },
+  {
+   "id": "I15",
+   "title": "Freelance Contract Clause Highlighter",
+   "members": []
+  },
+  {
+   "id": "I17",
+   "title": "Plant Watering Reminder from Photos",
+   "members": [
+    {
+     "id": "I39",
+     "title": "Houseplant Thirst Detector",
+     "same": 0.975
+    }
+   ]
+  },
+  {
+   "id": "I20",
+   "title": "Alt Text Auditor",
+   "members": []
+  },
+  {
+   "id": "I22",
+   "title": "Language Exchange Matcher",
+   "members": []
+  },
+  {
+   "id": "I24",
+   "title": "Second-hand Price Estimator",
+   "members": []
+  },
+  {
+   "id": "I28",
+   "title": "Noise Complaint Builder",
+   "members": []
+  },
+  {
+   "id": "I31",
+   "title": "Life Coach Bot",
+   "members": []
+  },
+  {
+   "id": "I35",
+   "title": "Volunteer Shift Filler",
+   "members": []
+  },
+  {
+   "id": "I37",
+   "title": "Museum Audio Guide Maker",
+   "members": []
+  }
+ ],
+ "dup_against": {}
+}
