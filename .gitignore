@@ -1,0 +1,8 @@
+out/
+logs/
+*.jsonl
+__pycache__/
+.omc/
+.claude/
+.DS_Store
+*.pyc
