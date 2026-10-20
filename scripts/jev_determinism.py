@@ -15,8 +15,13 @@ mid-run shows up as drift instead of hiding inside one item's block.
 
 Every request and response goes to <out>/raw_jev.jsonl (kept by jevlib). determinism.json is derived from it.
 
-    set -a; . ~/.secrets/credentials.env; set +a
+    export TYPESAFE_API_KEY=...                       # from https://console.typesafe.ai/settings/keys
     python3 scripts/jev_determinism.py --out out/determinism
+    python3 scripts/jev_determinism.py --replay mine.json --out out/mine   # your own questions
+
+Without --replay the items are the example ideas in `examples/ideas`, which exercise Score and Noul. With it,
+each comment in the replay is judged with the question set stored next to it, so you measure the questions
+production actually sends.
 
 Exit status: 0 when every Choice answer was identical, 3 when something flipped, 2 when a request failed.
 """
@@ -33,7 +38,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from jevlib import Jev, jload, jsave, now, pmap  # noqa: E402
 from jev_rank import build_questions  # noqa: E402
 
-DEFAULT_REPLAY = Path.home() / 'Claude/projects/insta-autodm/.omc/logs/jev-replay-ohou-2026-10-07T12-33-58-592Z.json'
 DEFAULT_IDEAS = Path(__file__).resolve().parent.parent / 'examples/ideas/items.json'
 DEFAULT_AXES = Path(__file__).resolve().parent.parent / 'examples/ideas/axes.json'
 
@@ -125,7 +129,9 @@ def summarise(item, runs):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description='Measure whether Jev repeats itself.')
-    ap.add_argument('--replay', default=str(DEFAULT_REPLAY), help='recorded replay supplying comment items and their questions')
+    ap.add_argument('--replay', default=None,
+                    help='optional JSON file with {"questions": ..., "rows": [{"kind", "comment_text", "comment_key"}]} '
+                         'to test your own production questions. Without it only the example Score/Noul axes are used.')
     ap.add_argument('--ideas', default=str(DEFAULT_IDEAS))
     ap.add_argument('--axes', default=str(DEFAULT_AXES))
     ap.add_argument('--praise', type=int, default=8, help='how many praise comments to add (the rare classes are always all included)')
@@ -136,7 +142,10 @@ def main(argv=None):
     ap.add_argument('--out', default='out/determinism')
     args = ap.parse_args(argv)
 
-    items = build_comment_items(Path(args.replay), args.praise) + build_idea_items(Path(args.ideas), Path(args.axes), args.ideas_n)
+    items = []
+    if args.replay:
+        items += build_comment_items(Path(args.replay), args.praise)
+    items += build_idea_items(Path(args.ideas), Path(args.axes), args.ideas_n)
     if not items:
         raise SystemExit('no items built')
     jev = Jev(args.out, model=args.model)
@@ -207,22 +216,24 @@ def main(argv=None):
     jsave(Path(args.out) / 'determinism.json', report)
 
     print()
-    print(f'모델 요청 {args.model} · 실제 응답 {models or "(raw 기록 없음)"}')
-    print(f'Choice 질문 {len(choice_qs)}개 중 {report["choice_exact"]}개 완전 일치 = {report["choice_exact_rate"]}')
-    print(f'  뒤집힘 {len(flips)}건 (문턱 근처 {len(flips) - len(confident_flips)} · 확신 상태 {len(confident_flips)})')
-    for s, k, q in flips:
-        print(f'    [{q.get("flip_zone")}] {s["id"]} · {k}: {q["choices"]} conf {q["conf_min"]}~{q["conf_max"]}')
-    print(f'Score/Noul 질문 {len(numeric_qs)}개 중 {report["numeric_exact"]}개 완전 일치 · 최대 sd {report["max_numeric_sd"]}')
+    print(f'model requested {args.model} · served {models or "(no raw record)"}')
+    if choice_qs:
+        print(f'Choice: {report["choice_exact"]}/{len(choice_qs)} identical across all {args.reps} repeats = {report["choice_exact_rate"]}')
+        print(f'  flips {len(flips)} (near threshold {len(flips) - len(confident_flips)} · confident {len(confident_flips)})')
+        for s, k, q in flips:
+            print(f'    [{q.get("flip_zone")}] {s["id"]} · {k}: {q["choices"]} conf {q["conf_min"]}~{q["conf_max"]}')
+    else:
+        print('Choice: none in this item set (Score/Noul only)')
+    print(f'Score/Noul: {report["numeric_exact"]}/{len(numeric_qs)} identical · max sd {report["max_numeric_sd"]}')
     for s, k, q in numeric_drift[:10]:
         print(f'    {s["id"]} · {k}: {q["values"]} sd {q["sd"]}')
     if errors:
-        print(f'오류 {len(errors)}건: {errors[:3]}')
-    print(f'원본: {Path(args.out) / "raw_jev.jsonl"}')
+        print(f'errors {len(errors)}: {errors[:3]}')
+    print(f'raw record: {Path(args.out) / "raw_jev.jsonl"}')
 
     if errors:
         return 2
     return 0 if not flips else 3
-
 
 if __name__ == '__main__':
     sys.exit(main())
