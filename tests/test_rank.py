@@ -14,6 +14,7 @@ from unittest import mock
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / 'scripts'))
 import jev_rank  # noqa: E402
+import jevlib  # noqa: E402
 
 # name -> (novelty, usefulness, feasibility, pitch_mechanism); scores are expected level indexes 0..4
 TABLE = {
@@ -133,7 +134,7 @@ class RankTest(unittest.TestCase):
         self.assertEqual(len(fake.bodies), len(ITEMS) * 2)
         for body in fake.bodies:
             self.assertEqual(set(body['state']), {'name', 'pitch'})
-            self.assertEqual(body['model'], 'jev-latest')
+            self.assertEqual(body['model'], jevlib.DEFAULT_MODEL)
         questions = sorted(tuple(sorted(b['questions'])) for b in fake.bodies)
         self.assertEqual(questions.count(('feasibility', 'novelty', 'usefulness')), len(ITEMS))
         self.assertEqual(questions.count(('pitch_mechanism',)), len(ITEMS))

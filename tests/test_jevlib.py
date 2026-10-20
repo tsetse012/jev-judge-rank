@@ -77,7 +77,7 @@ class AskTest(TempOut):
         self.assertEqual(req.get_header('Authorization'), 'Bearer test-key')
         self.assertEqual(req.get_header('Content-type'), 'application/json')
         self.assertEqual(json.loads(req.data.decode()), {
-            'model': 'jev-latest', 'state': {'text': 'hello'},
+            'model': jevlib.DEFAULT_MODEL, 'state': {'text': 'hello'},
             'questions': {'q': {'type': 'noul', 'instructions': '`text` is a greeting'}}})
         self.assertEqual(seen['timeout'], 90)
 

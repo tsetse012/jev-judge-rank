@@ -29,6 +29,8 @@ python3 $S/scripts/jev_rank.py --items items.json --config axes.json --out out/r
 python3 $S/scripts/jev_dedupe.py --items items.json --text-fields pitch,mechanism --order-field votes --out out/dedupe
 # recall: the corpus is a JSON array of {id, text, title, kind, pointer}
 python3 $S/scripts/jev_recall.py --corpus corpus.json --query "the decision to make, in one sentence" --out out/recall
+# determinism: ask the same items 5x and report what moved (about $0.006)
+python3 $S/scripts/jev_determinism.py --out out/determinism
 ```
 
 ## Rules to keep
@@ -38,3 +40,4 @@ python3 $S/scripts/jev_recall.py --corpus corpus.json --query "the decision to m
 - Facts that are not in the state (has a demo, is based on a source) go in item fields and `field_penalties`, not in questions.
 - Exit status 2 means some items or pairs failed: run the same command again. To stop a run, create `<out>/STOP`.
 - Report the result as an order, with the method, the counts, the cost from `costs.json` and the `--check` line. Thresholds were measured on `jev-1.13.0`.
+- **Choice repeats exactly; Score and Noul do not.** Measured 2026-10-20 (40 items x 5): Choice 20/20 identical, Score 58/60 differing, standard deviation 0.014–0.059. Compare Choice by equality, and Score/Noul by order (rank correlation, top-N overlap) or with a tolerance of about twice the standard deviation. A rank correlation near 0.98 still hides 30–45% of items changing position.

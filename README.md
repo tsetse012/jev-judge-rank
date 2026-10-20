@@ -98,7 +98,6 @@ TF-IDF kept 8 candidate pairs out of the 780 possible pairs, and each was asked 
 Add `--dry` to count the candidate pairs without a key or any request. Other options: `--against old.json` also compares every item with an older list and reports matches in `dup_against`; `--component-field` and `--component-values` switch pairs that include a component (an SDK, an MCP server, a plugin, a list) to a stricter question, because the default question ("true if only the language differs") merged a Go SDK with an MCP server; `--sim-fields` adds fields to the neighbour search without sending them to Jev. Run `python3 scripts/jev_dedupe.py --help` for the rest.
 
 ### Recall
-
 ![Recall flow: one situation sentence and a corpus; TF-IDF shortlists the closest entries while entries of kind family are always included; each candidate is sent to Jev in its own request with the question whether it would help in the situation; entries at or above 0.5 are listed by probability](docs/img/recall-flow.png)
 
 ```bash
@@ -116,6 +115,20 @@ The example corpus holds 35 one-line summaries of design patterns for Jev, catal
 ```
 
 Write the query as the decision to be made: what gets sorted into what. If nothing passes, rewrite the query or lower `--threshold`.
+
+### Determinism
+
+```bash
+python3 scripts/jev_determinism.py --out out/determinism          # 40 items x 5 repeats, about $0.006
+```
+
+Asks the same questions five times and reports what moved. Repeats of one item are spread across the run rather than sent back to back, so a change mid-run shows as drift instead of hiding inside one block.
+
+- **Choice** questions came back identical every time (20/20 questions, all five repeats).
+- **Score / Noul** did not: 58 of 60 Score questions differed between repeats, standard deviation 0.014–0.059.
+- On 20 ideas the repeat-to-repeat rank correlation was 0.982–0.991 and the top 5 set was identical, while 6–9 of 20 items changed position and 2.9% of pairs reversed.
+
+The practical rule: **exact equality is a valid check for Choice, and is not for Score/Noul.** Compare rankings by order (correlation, top-N set overlap) or allow about twice the standard deviation per axis.
 
 ## axes.json reference
 
@@ -210,8 +223,8 @@ Other entries go through a TF-IDF shortlist (`--shortlist`, default 120) before 
 - It does not write text. There are no summaries or explanations beyond the fixed report. If you need prose, give the ranked list to an LLM.
 - It takes no images, audio or video. Turn media into text first.
 - Counting, arithmetic and date comparison belong in code; Jev does not do them reliably. Put such facts in item fields and use `field_penalties`.
-- The thresholds (dedupe 0.65, recall 0.5, penalty 0.4) were measured on `jev-1.13.0`. The scripts ask for `jev-latest`; when that points to a new version, check the thresholds again on a sample of your own data. `raw_jev.jsonl` records which model answered each request.
-- Answers are not exactly reproducible. In the two recall runs for this README, the 29 unchanged requests moved by 0.021 on average and by at most 0.06, so items near a cut-off can swap places. Read the ranking as an order, and read close neighbours as ties.
+- The thresholds (dedupe 0.65, recall 0.5, penalty 0.4) were measured on `jev-1.13.0`. The scripts now **pin that version** (`JEV_MODEL` overrides it, default in `scripts/jevlib.py`); when you move to a new release, re-check the thresholds on a sample of your own data. `raw_jev.jsonl` records which model answered each request.
+- Choice answers repeat exactly; Score and Noul answers do not. Measured 2026-10-20 on `jev-1.13.0` (`scripts/jev_determinism.py`, 40 items x 5 repeats): every one of 20 Choice questions gave the same answer all five times, while 58 of 60 Score questions moved, with a standard deviation of 0.014 to 0.059 per axis. On the same 20 ideas the rank correlation between repeats was 0.982 to 0.991 and the top 5 set was identical every time, but 6 to 9 of 20 items changed position and 2.9% of item pairs reversed. **Read the top of a ranking as solid, individual positions below it as ties**, and do not compare two runs on exact score equality — compare order, or allow about twice the standard deviation.
 - The similarity step that picks candidate pairs and shortlists reads English words and Korean (Hangul syllables, split into overlapping two-character pieces, because Korean words carry particles and are often written without spaces). It does not split Japanese, Chinese, Cyrillic or other scripts. For such text, add an English description with `--sim-fields`, or use kind `family` in a small recall corpus. Jev itself reads those languages.
 - A rank is a reading order, not a decision. Open the top items before you act on them.
 

@@ -25,6 +25,10 @@ from pathlib import Path
 ENDPOINT = 'https://api.typesafe.ai/v1/systemone'
 KEYS_URL = 'https://console.typesafe.ai/settings/keys'
 BILLING_URL = 'https://console.typesafe.ai/settings/billing'
+# Pin the model version: 'jev-latest' silently starts pointing at a new release, and every threshold measured on
+# the old one stops being evidence. The README states which model the thresholds were measured on; this keeps it.
+# Override with JEV_MODEL=... for a deliberate upgrade, then re-check the goldens.
+DEFAULT_MODEL = os.environ.get('JEV_MODEL', 'jev-1.13.0').strip() or 'jev-1.13.0'
 PRICE_IN = 0.042 / 1e6          # USD per input token ($0.042 per million); output tokens are free (TypeSafe price list, 2026-09)
 RETRY_STATUS = (408, 429, 500, 502, 503, 504)
 LOCK = threading.Lock()         # guards raw_jev.jsonl, costs.json and the caches the scripts update from worker threads
@@ -83,12 +87,12 @@ class Jev:
     Every successful request/response pair is appended to <out>/raw_jev.jsonl. That file is the record to
     re-score from when you change how answers are combined; the summaries are derived from it."""
 
-    def __init__(self, out_dir, model='jev-latest', stop_file=None):
+    def __init__(self, out_dir, model=None, stop_file=None):
         self.out = Path(out_dir)
         self.out.mkdir(parents=True, exist_ok=True)
         self.raw = self.out / 'raw_jev.jsonl'
         self.costs = self.out / 'costs.json'
-        self.model = model
+        self.model = model or DEFAULT_MODEL
         self.stop = Path(stop_file) if stop_file else self.out / 'STOP'
         self.key = load_key()
         self.halted = None      # set after HTTP 402, so later calls stop without sending anything
