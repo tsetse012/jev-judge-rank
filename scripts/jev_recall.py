@@ -122,7 +122,8 @@ def main(argv=None):
                   f" -> {(c.get('text') or '')[:110]}\n        -> {c.get('pointer') or c.get('url') or ''}")
     if not hits:
         print('\nNo entry reached the threshold. Rewrite the query around the decision to make (what gets sorted '
-              'into what), or lower --threshold.')
+              'into what) and run it fresh.\n'
+              '  (Lowering --threshold against the same result is post-hoc tuning — declare the threshold first and re-run.)')
     print(f"\nRaw: {out / 'recall.json'} · {out / 'raw_jev.jsonl'}")
     return code
 
